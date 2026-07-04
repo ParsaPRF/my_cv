@@ -87,7 +87,7 @@
             <div class="contact-info">
               <p class="contact-title">تلفن</p>
 
-              <a href="tel:{{ profile.phone }}" class="contact-link">{{ profile.phone }}</a>
+              <a href="tel:{{ profile.phone|cut:' ' }}" class="contact-link" dir="ltr" style="unicode-bidi: plaintext;">{{ profile.phone }}</a>
             </div>
 
           </li>
