@@ -47,7 +47,7 @@
         <div class="info-content">
           <h1 class="name" title="{{ profile.full_name }}">{{ profile.full_name }}</h1>
 
-          <p class="title">توسعه‌دهنده وب</p>
+          <p class="title">{{ profile.job_title }}</p>
         </div>
 
         <button class="info_more-btn" data-sidebar-btn>
@@ -101,7 +101,7 @@
             <div class="contact-info">
               <p class="contact-title">تاریخ تولد</p>
 
-              <time datetime="1990-05-15">{{ profile.birthday }}</time>
+              <time>{{ profile.birthday }}</time>
             </div>
 
           </li>
@@ -127,19 +127,19 @@
         <ul class="social-list">
 
           <li class="social-item">
-            <a href="#" class="social-link">
+            <a href="{{ profile.facebook }}" class="social-link">
               <ion-icon name="logo-facebook"></ion-icon>
             </a>
           </li>
 
           <li class="social-item">
-            <a href="#" class="social-link">
+            <a href="{{ profile.twitter }}" class="social-link">
               <ion-icon name="logo-twitter"></ion-icon>
             </a>
           </li>
 
           <li class="social-item">
-            <a href="#" class="social-link">
+            <a href="{{ profile.instagram }}" class="social-link">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
           </li>
