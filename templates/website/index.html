@@ -1,0 +1,385 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ profile.name|default:"Amir Parsa Fatholahi" }} - CV{% endblock %}
+
+{% block content %}
+<header id="header-wrap">
+  <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar indigo">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          <span class="icon-menu"></span>
+          <span class="icon-menu"></span>
+          <span class="icon-menu"></span>
+        </button>
+        <a href="{% url 'website:index' %}" class="navbar-brand"><img src="{% static 'img/logo.png' %}" alt=""></a>
+      </div>
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="onepage-nev navbar-nav mr-auto w-100 justify-content-end clearfix">
+          <li class="nav-item active"><a class="nav-link" href="#hero-area">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#resume">Resume</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#languages">Languages</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item">
+            <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Dark Mode">
+              <i class="fa fa-moon-o"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <ul class="onepage-nev mobile-menu">
+      <li><a href="#hero-area">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#languages">Languages</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li>
+        <button id="theme-toggle-mobile" class="theme-toggle-btn" title="Toggle Dark Mode">
+          <i class="fa fa-moon-o"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="hero-area" class="hero-area-bg">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 text-center">
+          <div class="contents">
+            <h5 class="script-font wow fadeInUp" data-wow-delay="0.2s">Hello, I'm</h5>
+            <h2 class="head-title wow fadeInUp" data-wow-delay="0.4s">{{ profile.name|default:"Amir Parsa Fatholahi" }}</h2>
+            <p class="script-font wow fadeInUp" data-wow-delay="0.6s">{{ profile.title|default:"Web Designer & Developer" }}</p>
+            <ul class="social-icon wow fadeInUp" data-wow-delay="0.8s">
+              {% if profile.github %}
+              <li><a class="github" href="{{ profile.github }}" target="_blank"><i class="icon-social-github"></i></a></li>
+              {% endif %}
+              {% if profile.linkedin %}
+              <li><a class="linkedin" href="{{ profile.linkedin }}" target="_blank"><i class="icon-social-linkedin"></i></a></li>
+              {% endif %}
+              {% if profile.instagram %}
+              <li><a class="instagram" href="{{ profile.instagram }}" target="_blank"><i class="icon-social-instagram"></i></a></li>
+              {% endif %}
+            </ul>
+            <div class="header-button wow fadeInUp" data-wow-delay="1s">
+              <a href="#contact" class="btn btn-common">Contact Me</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- About / Biography Section -->
+<section id="about" class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="img-thumb wow fadeInLeft" data-wow-delay="0.3s">
+          {% if profile.photo %}
+          <img class="img-fluid" src="{{ profile.photo.url }}" alt="{{ profile.name }}">
+          {% else %}
+          <img class="img-fluid" src="{% static 'img/about/ME.png' %}" alt="{{ profile.name }}">
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="profile-wrapper wow fadeInRight" data-wow-delay="0.3s">
+          <h3>About Me</h3>
+          <p>{{ profile.bio|default:"Computer Science student with a passion for web design and development." }}</p>
+          <div class="about-profile">
+            <ul class="admin-profile">
+              <li><span class="pro-title"> Name </span> <span class="pro-detail">{{ profile.name|default:"Amir Parsa Fatholahi" }}</span></li>
+              <li><span class="pro-title"> Age </span> <span class="pro-detail">{{ profile.age|default:"21" }}</span></li>
+              <li><span class="pro-title"> Education </span> <span class="pro-detail">Computer Science Student</span></li>
+              <li><span class="pro-title"> Location </span> <span class="pro-detail">{{ profile.location|default:"Iran, Tehran" }}</span></li>
+              <li><span class="pro-title"> e-mail </span> <span class="pro-detail"><a href="mailto:{{ profile.email }}">{{ profile.email|default:"parsatf98@gmail.com" }}</a></span></li>
+              <li><span class="pro-title"> Phone </span> <span class="pro-detail">{{ profile.phone|default:"09192136163" }}</span></li>
+              {% if profile.linkedin %}
+              <li><span class="pro-title"> LinkedIn </span> <span class="pro-detail"><a href="{{ profile.linkedin }}" target="_blank">Profile</a></span></li>
+              {% endif %}
+              {% if profile.github %}
+              <li><span class="pro-title"> GitHub </span> <span class="pro-detail"><a href="{{ profile.github }}" target="_blank">Profile</a></span></li>
+              {% endif %}
+            </ul>
+          </div>
+          {% if profile.cv_file %}
+          <a href="{{ profile.cv_file.url }}" class="btn btn-common"><i class="icon-paper-clip"></i> Download Resume</a>
+          {% endif %}
+          <a href="{% url 'website:download_cv' %}" class="btn btn-common"><i class="icon-download"></i> Download PDF</a>
+          <a href="#contact" class="btn btn-danger"><i class="icon-speech"></i> Contact Me</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="services section-padding">
+  <h2 class="section-title wow flipInX" data-wow-delay="0.4s">My Skills</h2>
+  <div class="container">
+    <div class="row">
+      {% for category in skill_categories %}
+      <div class="col-md-6 col-lg-4 col-xs-12">
+        <div class="services-item wow fadeInDown" data-wow-delay="0.3s">
+          <div class="icon"><i class="icon-energy"></i></div>
+          <div class="services-content">
+            <h3>{{ category.name }}</h3>
+            {% for skill in category.skills.all %}
+            <p>{{ skill.name }}: {{ skill.description }}</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Resume Section: Education & Experience -->
+<div id="resume" class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="education wow fadeInRight" data-wow-delay="0.3s">
+          <ul class="timeline">
+            <li>
+              <i class="icon-graduation"></i>
+              <h2 class="timelin-title">Education</h2>
+            </li>
+            {% for edu in education_items %}
+            <li>
+              <div class="content-text">
+                <h3 class="line-title">{{ edu.title }}</h3>
+                <span>{{ edu.institution }}</span>
+                <p class="line-text">{{ edu.description }}</p>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="experience wow fadeInRight" data-wow-delay="0.6s">
+          <ul class="timeline">
+            <li>
+              <i class="icon-briefcase"></i>
+              <h2 class="timelin-title">Experience</h2>
+            </li>
+            {% for exp in experience_items %}
+            <li>
+              <div class="content-text">
+                <h3 class="line-title">{{ exp.title }}</h3>
+                <span>{{ exp.period }}</span>
+                <p class="line-text">{{ exp.description }}</p>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Projects Section -->
+<section id="projects" class="section-padding">
+  <div class="container">
+    <h2 class="section-title wow flipInX" data-wow-delay="0.4s">My Projects</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="controls text-center">
+          <a class="filter active btn btn-common" data-filter="all">All</a>
+          {% for category in project_categories %}
+          <a class="filter btn btn-common" data-filter=".{{ category.name|lower }}">{{ category.name }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      <div id="portfolio" class="row wow fadeInDown" data-wow-delay="0.4s">
+        {% for project in projects %}
+        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 mix {{ project.category.name|lower }}">
+          <div class="portfolio-item">
+            <div class="shot-item">
+              <img src="{{ project.image.url }}" alt="{{ project.title }}" onerror="this.src='{% static 'img/gallery/img-1.jpg' %}'" />
+              <div class="overlay">
+                <div class="icons">
+                  <a class="lightbox preview" href="{{ project.image.url }}"><i class="icon-eye"></i></a>
+                  {% if project.github_url %}
+                  <a class="link" href="{{ project.github_url }}" target="_blank"><i class="icon-link"></i></a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="text-center mt-2">
+              <h5>{{ project.title }}</h5>
+              <p>{{ project.technologies }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Programming Languages Section -->
+<section id="languages" class="section-padding">
+  <div class="container">
+    <h2 class="section-title wow flipInX" data-wow-delay="0.4s">Programming Languages</h2>
+    <div class="row">
+      {% for lang in programming_languages %}
+      <div class="col-md-4 col-sm-6">
+        <div class="services-item wow fadeInDown" data-wow-delay="0.3s">
+          <div class="icon"><i class="icon-energy"></i></div>
+          <div class="services-content">
+            <h3>{{ lang.name }}</h3>
+            <p>{{ lang.technologies }}</p>
+            <div class="progress">
+              <div class="progress-bar" style="width: {{ lang.percentage }}%;" role="progressbar">{{ lang.percentage }}%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Language Certificates -->
+{% if language_certificates %}
+<section class="section-padding" style="padding-top: 0;">
+  <div class="container">
+    <h2 class="section-title wow flipInX" data-wow-delay="0.4s">Language Certificates</h2>
+    <div class="row">
+      {% for cert in language_certificates %}
+      <div class="col-md-8 offset-md-2">
+        <div class="services-item wow fadeInDown" data-wow-delay="0.3s">
+          <div class="icon"><i class="icon-bubble"></i></div>
+          <div class="services-content">
+            <h3>{{ cert.title }}</h3>
+            <p>{{ cert.institution }} - {{ cert.level }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Contact Section -->
+<section id="contact" class="section-padding">
+  <div class="contact-form">
+    <div class="container">
+      <div class="row contact-form-area wow fadeInUp" data-wow-delay="0.4s">
+        <div class="col-md-6 col-lg-6 col-sm-12">
+          <div class="contact-block">
+            <h2>Contact Form</h2>
+            <form id="contactForm" method="POST" action="{% url 'website:contact' %}">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="email" placeholder="Email" id="email" class="form-control" name="email" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input type="text" placeholder="Subject" id="msg_subject" class="form-control" name="subject" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <textarea class="form-control" id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="submit-button">
+                    <button class="btn btn-common" id="submit" type="submit">Send Message</button>
+                    <div id="msgSubmit" class="h3 text-center hidden"></div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6 col-sm-12">
+          <div class="footer-right-area wow fadeIn">
+            <h2>Contact Info</h2>
+            <div class="footer-right-contact">
+              <div class="single-contact">
+                <div class="contact-icon"><i class="fa fa-map-marker"></i></div>
+                <p>{{ profile.location|default:"Iran, Tehran" }}</p>
+              </div>
+              <div class="single-contact">
+                <div class="contact-icon"><i class="fa fa-envelope"></i></div>
+                <p><a href="mailto:{{ profile.email }}">{{ profile.email|default:"parsatf98@gmail.com" }}</a></p>
+              </div>
+              <div class="single-contact">
+                <div class="contact-icon"><i class="fa fa-phone"></i></div>
+                <p><a href="tel:{{ profile.phone }}">{{ profile.phone|default:"09192136163" }}</a></p>
+              </div>
+              {% if profile.github %}
+              <div class="single-contact">
+                <div class="contact-icon"><i class="icon-social-github"></i></div>
+                <p><a href="{{ profile.github }}" target="_blank">{{ profile.github }}</a></p>
+              </div>
+              {% endif %}
+              {% if profile.linkedin %}
+              <div class="single-contact">
+                <div class="contact-icon"><i class="icon-social-linkedin"></i></div>
+                <p><a href="{{ profile.linkedin }}" target="_blank">{{ profile.linkedin }}</a></p>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer-area section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="footer-text text-center wow fadeInDown" data-wow-delay="0.3s">
+          <ul class="social-icon">
+            {% if profile.github %}
+            <li><a class="github" href="{{ profile.github }}" target="_blank"><i class="icon-social-github"></i></a></li>
+            {% endif %}
+            {% if profile.linkedin %}
+            <li><a class="linkedin" href="{{ profile.linkedin }}" target="_blank"><i class="icon-social-linkedin"></i></a></li>
+            {% endif %}
+            {% if profile.instagram %}
+            <li><a class="instagram" href="{{ profile.instagram }}" target="_blank"><i class="icon-social-instagram"></i></a></li>
+            {% endif %}
+          </ul>
+          <p>Copyright &copy; 2026 {{ profile.name|default:"Amir Parsa Fatholahi" }}. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="back-to-top">
+  <i class="icon-arrow-up"></i>
+</a>
+{% endblock %}
