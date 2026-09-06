@@ -8,4 +8,5 @@ urlpatterns = [
     path('contact/', views.contact_view, name='contact'),
     path('newsletter/', views.newsletter_view, name='newsletter'),
     path('download-cv/', views.download_cv, name='download_cv'),
+    path('set-language/<str:lang>/', views.set_language, name='set_language'),
 ]

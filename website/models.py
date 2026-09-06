@@ -4,7 +4,9 @@ from django.db import models
 class Profile(models.Model):
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
+    title_fa = models.CharField(max_length=255, blank=True, default='')
     bio = models.TextField()
+    bio_fa = models.TextField(blank=True, default='')
     age = models.PositiveIntegerField()
     location = models.CharField(max_length=255)
     email = models.EmailField()
@@ -21,6 +23,7 @@ class Profile(models.Model):
 
 class SkillCategory(models.Model):
     name = models.CharField(max_length=100)
+    name_fa = models.CharField(max_length=100, blank=True, default='')
 
     class Meta:
         verbose_name_plural = 'Skill Categories'
@@ -32,7 +35,9 @@ class SkillCategory(models.Model):
 class Skill(models.Model):
     category = models.ForeignKey(SkillCategory, on_delete=models.CASCADE, related_name='skills')
     name = models.CharField(max_length=100)
+    name_fa = models.CharField(max_length=100, blank=True, default='')
     description = models.TextField()
+    description_fa = models.TextField(blank=True, default='')
 
     def __str__(self):
         return self.name
@@ -40,9 +45,12 @@ class Skill(models.Model):
 
 class Education(models.Model):
     title = models.CharField(max_length=255)
+    title_fa = models.CharField(max_length=255, blank=True, default='')
     institution = models.CharField(max_length=255)
+    institution_fa = models.CharField(max_length=255, blank=True, default='')
     period = models.CharField(max_length=100)
     description = models.TextField()
+    description_fa = models.TextField(blank=True, default='')
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -54,8 +62,10 @@ class Education(models.Model):
 
 class Experience(models.Model):
     title = models.CharField(max_length=255)
+    title_fa = models.CharField(max_length=255, blank=True, default='')
     period = models.CharField(max_length=100)
     description = models.TextField()
+    description_fa = models.TextField(blank=True, default='')
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -67,6 +77,7 @@ class Experience(models.Model):
 
 class ProjectCategory(models.Model):
     name = models.CharField(max_length=100)
+    name_fa = models.CharField(max_length=100, blank=True, default='')
 
     class Meta:
         verbose_name_plural = 'Project Categories'
@@ -77,12 +88,15 @@ class ProjectCategory(models.Model):
 
 class Project(models.Model):
     title = models.CharField(max_length=255)
+    title_fa = models.CharField(max_length=255, blank=True, default='')
     category = models.ForeignKey(ProjectCategory, on_delete=models.CASCADE, related_name='projects')
     technologies = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    description_fa = models.TextField(blank=True, default='')
     image = models.ImageField(upload_to='projects/', blank=True)
     github_url = models.URLField(blank=True)
     demo_url = models.URLField(blank=True)
+    live_url = models.URLField(blank=True)
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -94,7 +108,9 @@ class Project(models.Model):
 
 class ProgrammingLanguage(models.Model):
     name = models.CharField(max_length=100)
+    name_fa = models.CharField(max_length=100, blank=True, default='')
     technologies = models.CharField(max_length=255)
+    technologies_fa = models.CharField(max_length=255, blank=True, default='')
     percentage = models.PositiveIntegerField(default=0)
     order = models.PositiveIntegerField(default=0)
 
@@ -108,8 +124,11 @@ class ProgrammingLanguage(models.Model):
 
 class LanguageCertificate(models.Model):
     title = models.CharField(max_length=255)
+    title_fa = models.CharField(max_length=255, blank=True, default='')
     institution = models.CharField(max_length=255)
+    institution_fa = models.CharField(max_length=255, blank=True, default='')
     level = models.CharField(max_length=50)
+    level_fa = models.CharField(max_length=50, blank=True, default='')
 
     def __str__(self):
         return self.title

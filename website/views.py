@@ -7,14 +7,32 @@ from reportlab.lib.colors import HexColor
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from .models import (
-    Profile, SkillCategory, Education, Experience,
+    Profile, SkillCategory, Skill, Education, Experience,
     ProjectCategory, Project, ProgrammingLanguage,
     LanguageCertificate, Contact, Newsletter
 )
 from .forms import ContactForm, NewsletterForm
+from .translations import TRANSLATIONS
+from .utils import (
+    localize_profile, localize_categories, localize_education,
+    localize_experience, localize_project_categories,
+    localize_projects, localize_programming_languages,
+    localize_certificates
+)
+
+
+def set_language(request, lang):
+    if lang in ['en', 'fa']:
+        response = redirect('website:index')
+        response.set_cookie('lang', lang, max_age=365*24*60*60)
+        return response
+    return redirect('website:index')
 
 
 def index_view(request):
+    lang = request.COOKIES.get('lang', 'en')
+    t = TRANSLATIONS.get(lang, TRANSLATIONS['en'])
+
     profile = Profile.objects.first()
     skill_categories = SkillCategory.objects.all()
     education_items = Education.objects.all()
@@ -25,14 +43,20 @@ def index_view(request):
     language_certificates = LanguageCertificate.objects.all()
 
     context = {
-        'profile': profile,
-        'skill_categories': skill_categories,
-        'education_items': education_items,
-        'experience_items': experience_items,
-        'project_categories': project_categories,
-        'projects': projects,
-        'programming_languages': programming_languages,
-        'language_certificates': language_certificates,
+        't': t,
+        'lang': lang,
+        'profile': localize_profile(profile, lang),
+        'skill_categories': localize_categories(skill_categories, lang),
+        'education_items': localize_education(education_items, lang),
+        'experience_items': localize_experience(experience_items, lang),
+        'project_categories': localize_project_categories(project_categories, lang),
+        'projects': localize_projects(projects, lang),
+        'programming_languages': localize_programming_languages(programming_languages, lang),
+        'language_certificates': localize_certificates(language_certificates, lang),
+        'stat_projects': projects.count(),
+        'stat_skills': Skill.objects.count(),
+        'stat_langs': programming_languages.count(),
+        'stat_experience': 3,
     }
     return render(request, 'website/index.html', context)
 
@@ -73,7 +97,6 @@ def download_cv(request):
     styles = getSampleStyleSheet()
     elements = []
     
-    # Custom styles
     title_style = ParagraphStyle(
         'CustomTitle',
         parent=styles['Heading1'],
@@ -99,7 +122,6 @@ def download_cv(request):
         spaceAfter=8
     )
     
-    # Profile Info
     elements.append(Paragraph(profile.name, title_style))
     elements.append(Paragraph(profile.title, normal_style))
     elements.append(Paragraph(f"Email: {profile.email}", normal_style))
@@ -107,12 +129,10 @@ def download_cv(request):
     elements.append(Paragraph(f"Location: {profile.location}", normal_style))
     elements.append(Spacer(1, 20))
     
-    # Bio
     elements.append(Paragraph("About Me", heading_style))
     elements.append(Paragraph(profile.bio, normal_style))
     elements.append(Spacer(1, 20))
     
-    # Education
     elements.append(Paragraph("Education", heading_style))
     for edu in Education.objects.all():
         elements.append(Paragraph(f"<b>{edu.title}</b>", normal_style))
@@ -120,7 +140,6 @@ def download_cv(request):
         elements.append(Paragraph(edu.description, normal_style))
     elements.append(Spacer(1, 20))
     
-    # Experience
     elements.append(Paragraph("Experience", heading_style))
     for exp in Experience.objects.all():
         elements.append(Paragraph(f"<b>{exp.title}</b>", normal_style))
@@ -128,14 +147,12 @@ def download_cv(request):
         elements.append(Paragraph(exp.description, normal_style))
     elements.append(Spacer(1, 20))
     
-    # Skills
     elements.append(Paragraph("Skills", heading_style))
     for cat in SkillCategory.objects.all():
         for skill in cat.skills.all():
             elements.append(Paragraph(f"• {skill.name}: {skill.description}", normal_style))
     elements.append(Spacer(1, 20))
     
-    # Programming Languages
     elements.append(Paragraph("Programming Languages", heading_style))
     for lang in ProgrammingLanguage.objects.all():
         elements.append(Paragraph(f"• {lang.name}: {lang.technologies} ({lang.percentage}%)", normal_style))

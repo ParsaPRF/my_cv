@@ -121,11 +121,19 @@ Project.objects.create(
     order=5
 )
 Project.objects.create(
+    title='Travelo',
+    category=cat_web,
+    technologies='Django, SQLite, HTML/CSS',
+    description='Travel blog website built with Django - Based on Colorlib Travelo template with authentication, blog posts, and comments.',
+    github_url='https://github.com/ParsaPRF/travelo',
+    order=6
+)
+Project.objects.create(
     title='E-commerce Backend',
     category=cat_web,
     technologies='Django REST, PostgreSQL, JWT',
     description='Full-featured e-commerce backend with REST API, authentication, and product management.',
-    order=6
+    order=7
 )
 
 # Programming Languages
@@ -138,9 +146,9 @@ ProgrammingLanguage.objects.create(name='Git', technologies='Version Control, Gi
 
 # Language Certificates
 LanguageCertificate.objects.create(
-    title='C2 English Certificate',
+    title='C1 English Certificate',
     institution='Kanoon Zaban Language Institute',
-    level='C2 (Advanced)'
+    level='C1 (Upper-Intermediate)'
 )
 
 print("Database populated successfully!")

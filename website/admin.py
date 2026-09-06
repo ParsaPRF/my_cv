@@ -10,10 +10,10 @@ from .models import (
 @admin.register(Profile)
 class ProfileAdmin(SummernoteModelAdmin):
     list_display = ('name', 'email', 'phone', 'photo')
-    summernote_fields = ('bio',)
+    summernote_fields = ('bio', 'bio_fa')
     fieldsets = (
         ('Personal Info', {
-            'fields': ('name', 'title', 'bio', 'age', 'location', 'photo')
+            'fields': ('name', 'title', 'title_fa', 'bio', 'bio_fa', 'age', 'location', 'photo')
         }),
         ('Contact Info', {
             'fields': ('email', 'phone')
@@ -29,49 +29,49 @@ class ProfileAdmin(SummernoteModelAdmin):
 
 @admin.register(SkillCategory)
 class SkillCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'name_fa')
 
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category')
+    list_display = ('name', 'name_fa', 'category')
     list_filter = ('category',)
 
 
 @admin.register(Education)
 class EducationAdmin(SummernoteModelAdmin):
-    list_display = ('title', 'institution', 'period', 'order')
+    list_display = ('title', 'title_fa', 'institution', 'period', 'order')
     ordering = ('order',)
-    summernote_fields = ('description',)
+    summernote_fields = ('description', 'description_fa')
 
 
 @admin.register(Experience)
 class ExperienceAdmin(SummernoteModelAdmin):
-    list_display = ('title', 'period', 'order')
+    list_display = ('title', 'title_fa', 'period', 'order')
     ordering = ('order',)
-    summernote_fields = ('description',)
+    summernote_fields = ('description', 'description_fa')
 
 
 @admin.register(ProjectCategory)
 class ProjectCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'name_fa')
 
 
 @admin.register(Project)
 class ProjectAdmin(SummernoteModelAdmin):
-    list_display = ('title', 'category', 'image', 'order')
+    list_display = ('title', 'title_fa', 'category', 'image', 'order')
     list_filter = ('category',)
     ordering = ('order',)
-    summernote_fields = ('description',)
+    summernote_fields = ('description', 'description_fa')
     fieldsets = (
         ('Project Info', {
-            'fields': ('title', 'category', 'technologies', 'description')
+            'fields': ('title', 'title_fa', 'category', 'technologies', 'description', 'description_fa')
         }),
         ('Media', {
             'fields': ('image',)
         }),
         ('Links', {
-            'fields': ('github_url', 'demo_url')
+            'fields': ('github_url', 'demo_url', 'live_url')
         }),
         ('Ordering', {
             'fields': ('order',)
@@ -81,13 +81,13 @@ class ProjectAdmin(SummernoteModelAdmin):
 
 @admin.register(ProgrammingLanguage)
 class ProgrammingLanguageAdmin(admin.ModelAdmin):
-    list_display = ('name', 'percentage', 'order')
+    list_display = ('name', 'name_fa', 'percentage', 'order')
     ordering = ('order',)
 
 
 @admin.register(LanguageCertificate)
 class LanguageCertificateAdmin(admin.ModelAdmin):
-    list_display = ('title', 'institution', 'level')
+    list_display = ('title', 'title_fa', 'institution', 'level')
 
 
 @admin.register(Contact)
