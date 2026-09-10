@@ -98,6 +98,7 @@ Project.objects.create(
     description='A complete realworld Python application that fetches and displays graphical weather information for cities worldwide.',
     description_fa='یک اپلیکیشن کامل پایتون که اطلاعات آب و هوا را برای شهرهای سراسر جهان دریافت و نمایش می‌دهد.',
     github_url='https://github.com/ParsaPRF/Python-GUI-Weather-Application',
+    image='projects/weather.jpg',
     order=1
 )
 Project.objects.create(
@@ -108,6 +109,7 @@ Project.objects.create(
     description='A calculator built in Python without using the eval function, implementing expression parsing from scratch.',
     description_fa='ماشین حسابی ساخته شده در پایتون بدون استفاده از تابع eval، با پیاده‌سازی تحلیل عبارات از صفر.',
     github_url='https://github.com/ParsaPRF/This-is-a-calculator-built-in-Python-without-using-the-eval-function',
+    image='projects/calculator.jpg',
     order=2
 )
 Project.objects.create(
@@ -118,6 +120,7 @@ Project.objects.create(
     description='GitHub profile README with personal information and project showcases.',
     description_fa='README پروفایل گیت‌هاب با اطلاعات شخصی و نمایش پروژه‌ها.',
     github_url='https://github.com/ParsaPRF/ParsaPRF',
+    image='projects/profile.jpg',
     order=3
 )
 Project.objects.create(
@@ -127,6 +130,7 @@ Project.objects.create(
     technologies='Django, Bootstrap, HTML/CSS',
     description='Professional resume website built with Django framework.',
     description_fa='وب‌سایت رزومه حرفه‌ای ساخته شده با فریم‌ورک Django.',
+    image='projects/cv.jpg',
     order=4
 )
 Project.objects.create(
@@ -137,6 +141,7 @@ Project.objects.create(
     description='Online browser-based RTS game forked from openfrontio.',
     description_fa='بازی استراتژیک آنلاین مرورگری فورک شده از openfrontio.',
     github_url='https://github.com/ParsaPRF/OpenFrontIO',
+    image='projects/game.jpg',
     order=5
 )
 Project.objects.create(
@@ -147,6 +152,7 @@ Project.objects.create(
     description='Travel blog website built with Django - Based on Colorlib Travelo template with authentication, blog posts, and comments.',
     description_fa='وبلاگ سفر ساخته شده با Django - بر اساس قالب Colorlib Travelo با احراز هویت، پست‌های وبلاگ و نظرات.',
     github_url='https://github.com/ParsaPRF/travelo',
+    image='projects/travel.jpg',
     order=6
 )
 Project.objects.create(
@@ -156,6 +162,7 @@ Project.objects.create(
     technologies='Django REST, PostgreSQL, JWT',
     description='Full-featured e-commerce backend with REST API, authentication, and product management.',
     description_fa='بک‌اند کامل فروشگاه آنلاین با REST API، احراز هویت و مدیریت محصولات.',
+    image='projects/ecommerce.jpg',
     order=7
 )
 

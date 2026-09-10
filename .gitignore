@@ -18,7 +18,8 @@ build/
 # Django
 *.log
 db.sqlite3
-media/
+media/*
+!media/projects/
 staticfiles/
 
 # IDE
